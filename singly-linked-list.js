@@ -79,7 +79,6 @@ class SinglyLinkedList {
       this.head = newNode;
       this.tail = this.head;
     } else {
-      // WARNING: has to be in else statement or can create self-refering circular list
       // connect current head to new head
       newNode.next = this.head;
       this.head = newNode;
@@ -87,6 +86,18 @@ class SinglyLinkedList {
 
     this.length++;
     return this;
+  }
+  // get itemAt
+  get(idx) {
+    if (idx < 0 || idx >= this.length) return null;
+    let counter = 0;
+    let current = this.head;
+    //
+    while (counter !== idx) {
+      current = current.next;
+      counter++;
+    }
+    return current;
   }
   //
   traverse() {
