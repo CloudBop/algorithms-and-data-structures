@@ -194,8 +194,11 @@ class SinglyLinkedList {
   }
 }
 
-var testList2 = new SinglyLinkedList();
-
-testList2.push('Hello');
-testList2.push('World');
-testList2.push('!');
+const list = new SinglyLinkedList();
+list.push('100!');
+list.push('200');
+list.push('300!');
+list.push('400');
+list.push('500');
+list.push('600');
+list.push('700');
