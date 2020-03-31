@@ -99,6 +99,15 @@ class SinglyLinkedList {
     }
     return current;
   }
+  // set itemAt
+  set(idx, value) {
+    let foundNode = this.get(idx);
+    if (foundNode) {
+      foundNode.val = value;
+      return true;
+    }
+    return false;
+  }
   //
   traverse() {
     let current = this.head;
