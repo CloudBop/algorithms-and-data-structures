@@ -108,6 +108,24 @@ class SinglyLinkedList {
     }
     return false;
   }
+  // insert itemAt
+  insert(idx, val) {
+    if (idx < 0 || idx > this.length) return false;
+
+    if (idx === 0) return !!this.unshift(val);
+
+    if (idx === this.length) return !!this.push(val);
+
+    // get node before new idx
+    let insertAfterNode = this.get(idx - 1);
+    const newNode = new Node(val);
+
+    newNode.next = insertAfterNode.next;
+    insertAfterNode.next = newNode;
+    this.length++;
+
+    return true;
+  }
   //
   traverse() {
     let current = this.head;
