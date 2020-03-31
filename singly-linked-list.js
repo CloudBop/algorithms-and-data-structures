@@ -110,12 +110,11 @@ class SinglyLinkedList {
   }
   // insert itemAt
   insert(idx, val) {
+    // invalid cases
     if (idx < 0 || idx > this.length) return false;
-
+    // begging and end
     if (idx === 0) return !!this.unshift(val);
-
     if (idx === this.length) return !!this.push(val);
-
     // get node before new idx
     let insertAfterNode = this.get(idx - 1);
     const newNode = new Node(val);
