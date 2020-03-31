@@ -142,7 +142,7 @@ class SinglyLinkedList {
     this.length--;
     return removedNode;
   }
-  // no copies!
+  // iterative - no copies, swapped in place!
   reverseInPlace() {
     //
     let next,
@@ -163,6 +163,13 @@ class SinglyLinkedList {
       //
       node = next;
     }
+    return this;
+  }
+  //
+  recursiveReverse() {
+    let current = this.shift();
+    if (this.length > 1) this.recursiveReverse();
+    this.push(current.val);
     return this;
   }
   //
