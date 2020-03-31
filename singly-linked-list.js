@@ -126,11 +126,28 @@ class SinglyLinkedList {
     return true;
   }
   //
+  remove(idx) {
+    // out of bounds
+    if (idx < 0 || idx >= this.length) return undefined;
+    // first+last
+    if (idx === 0) return this.shift();
+    if (idx === this.length - 1) return this.pop();
+    // get node before the node to remove
+    let prevNode = this.get(idx - 1);
+    // get removedNode
+    let removedNode = prevNode.next;
+    // link prevNode to removedNode.next
+    prevNode.next = removedNode.next;
+    //
+    this.length--;
+    return removedNode;
+  }
+  //
   traverse() {
     let current = this.head;
     while (current) {
       console.log(current.val);
-      // basecase
+      // basecase, eventually undefined
       current = current.next;
     }
   }
