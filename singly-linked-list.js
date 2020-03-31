@@ -142,14 +142,48 @@ class SinglyLinkedList {
     this.length--;
     return removedNode;
   }
+  // no copies!
+  reverseInPlace() {
+    //
+    let next,
+      // has to be null for last item in list
+      prev = null,
+      node = this.head;
+    // swap
+    this.head = this.tail;
+    this.tail = node;
+    // reconstructs list in reverse
+    for (let i = 0; i < this.length; i++) {
+      //
+      next = node.next;
+      //
+      node.next = prev;
+      //
+      prev = node;
+      //
+      node = next;
+    }
+    return this;
+  }
+  //
+  // methods below for diagnostics
   //
   traverse() {
     let current = this.head;
     while (current) {
       console.log(current.val);
-      // basecase, eventually undefined
+      // basecase
       current = current.next;
     }
+  }
+  print() {
+    const arr = [];
+    let current = this.head;
+    while (current) {
+      arr.push(current.val);
+      current = current.next;
+    }
+    console.log(arr);
   }
 }
 
