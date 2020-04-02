@@ -120,6 +120,15 @@ class DoubleLinkedList {
     }
     return current;
   }
+  // set
+  set(idx, val) {
+    let updatedNode = this.get(idx);
+    if (updatedNode != null) {
+      updatedNode.val = val;
+      return true;
+    }
+    return false;
+  }
 }
 
 let myTestList = new DoubleLinkedList();
