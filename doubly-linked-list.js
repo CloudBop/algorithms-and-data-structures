@@ -91,6 +91,35 @@ class DoubleLinkedList {
     this.length++;
     return this;
   }
+  // get item at
+  get(idx) {
+    // cannot be smaller than 0 or larger or = length (0 index)
+    if (idx < 0 || idx >= this.length) return undefined;
+    //
+    let current, count;
+    if (idx <= this.length / 2) {
+      // first 1/2 start at head
+      count = 0;
+      current = this.head;
+      while (count != idx) {
+        // look to next item
+        current = current.next;
+        // and increment
+        count++;
+      }
+      //
+    } else {
+      //2nd half start at end
+      count = this.length - 1;
+      //
+      current = this.tail;
+      while (count != idx) {
+        current = current.prev;
+        count--;
+      }
+    }
+    return current;
+  }
 }
 
 let myTestList = new DoubleLinkedList();
@@ -101,3 +130,21 @@ myTestList.push(400);
 myTestList.push(600);
 myTestList.push(800);
 myTestList.push(1000);
+
+/**
+ * Get method with single loop
+ * 
+get(){
+  if(index < 0 || index >= this.length) return null;
+  if(index === this.length) return this.tail;
+  let currentNode = (index <= (this.length/2)) ? this.head: this.tail;
+  let traverseDirection = (index <= (this.length/2)) ? 'next': 'prev';
+  if(index > (this.length/2)) {
+      index = ((this.length - 1) - index); 
+  }
+  for(let i = 0; i < index; i++) {
+      currentNode = currentNode[traverseDirection];
+  }
+  return currentNode;
+}
+ */
