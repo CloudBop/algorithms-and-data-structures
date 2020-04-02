@@ -93,7 +93,7 @@ class DoubleLinkedList {
   }
   // get item at
   get(idx) {
-    // cannot be smaller than 0 or larger or = length (0 index)
+    // cannot be smaller than 0 or larger or = length (0 index there is nothing at this.length)
     if (idx < 0 || idx >= this.length) return undefined;
     //
     let current, count;
@@ -132,7 +132,7 @@ class DoubleLinkedList {
   //
   // insert
   insert(idx, val) {
-    // cannot be smaller than 0 or larger than length (0 index)
+    // cannot be smaller than 0 can be equal to length as there's no reference to last item (unlike remove, set ect)
     if (idx < 0 || idx > this.length) return undefined;
     // idx first item
     if (idx === 0) return !!this.unshift(val);
@@ -151,6 +151,29 @@ class DoubleLinkedList {
     //
     this.length++;
     return true;
+  }
+  // remove
+  //
+  remove(idx) {
+    // cannot be smaller than 0 or larger than length (0 index)
+    if (idx < 0 || idx >= this.length) return undefined;
+    // idx first item
+    if (idx === 0) return this.shift();
+    // idx is last item
+    if (idx === this.length - 1) return this.pop();
+    //
+    let removedNode = this.get(idx);
+    let beforeNode = removedNode.prev;
+    let afterNode = removedNode.next;
+    // link nodes either side of removed nodes
+    beforeNode.next = afterNode;
+    afterNode.prev = beforeNode;
+    //
+    removedNode.next = null;
+    removedNode.prev = null;
+    //
+    this.length--;
+    return removedNode;
   }
 }
 
