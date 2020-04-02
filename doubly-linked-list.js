@@ -73,6 +73,24 @@ class DoubleLinkedList {
     this.length--;
     return removedNode;
   }
+  // add new item to head
+  unshift(val) {
+    let newNode = new Node(val);
+    //
+    if (this.length === 0) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      // link prev (newNode) to current head
+      this.head.prev = newNode;
+      // link newNode.next to current head
+      newNode.next = this.head;
+      // assign newNode to head
+      this.head = newNode;
+    }
+    this.length++;
+    return this;
+  }
 }
 
 let myTestList = new DoubleLinkedList();
