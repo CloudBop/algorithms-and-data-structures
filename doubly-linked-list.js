@@ -129,6 +129,29 @@ class DoubleLinkedList {
     }
     return false;
   }
+  //
+  // insert
+  insert(idx, val) {
+    // cannot be smaller than 0 or larger than length (0 index)
+    if (idx < 0 || idx > this.length) return undefined;
+    // idx first item
+    if (idx === 0) return !!this.unshift(val);
+    // idx is last item
+    if (idx === this.length - 1) return !!this.push(val);
+    //
+    let newNode = new Node(val);
+    //
+    let prevNode = this.get(idx - 1);
+    // link newNode.next using prevNode.next
+    newNode.next = prevNode.next;
+    // link newNode.prev to prevNode
+    newNode.prev = prevNode;
+    //set prevNode .next to newNode
+    prevNode.next = newNode;
+    //
+    this.length++;
+    return true;
+  }
 }
 
 let myTestList = new DoubleLinkedList();
