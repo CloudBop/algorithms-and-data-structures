@@ -153,7 +153,6 @@ class DoubleLinkedList {
     return true;
   }
   // remove
-  //
   remove(idx) {
     // cannot be smaller than 0 or larger than length (0 index)
     if (idx < 0 || idx >= this.length) return undefined;
@@ -174,6 +173,29 @@ class DoubleLinkedList {
     //
     this.length--;
     return removedNode;
+  }
+  reverseInPlace() {
+    let next,
+      // has to be null for last item in list
+      prev = null,
+      node = this.head;
+    // swap
+    this.head = this.tail;
+    this.tail = node;
+    // reconstructs list in reverse
+    for (let i = 0; i < this.length; i++) {
+      //
+      next = node.next;
+      prev = node.prev;
+      //
+      node.next = prev;
+      node.prev = next;
+      //
+      prev = node;
+      //
+      node = next;
+    }
+    return this;
   }
 }
 
