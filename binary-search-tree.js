@@ -142,8 +142,27 @@ class BinarySearchTree {
       //
       if (node.left) traverseHelper(node.left);
       if (node.right) traverseHelper(node.right);
-      //
+      // must be a leaf
+      // node || node.value
       data.push(node.value);
+    }
+    //
+    traverseHelper(current);
+    return data;
+  }
+  //
+  depth1stSearch_inOrder() {
+    // test
+    //  [3, 6, 8, 10, 15, 20]
+    //
+    var data = [],
+      current = this.root;
+    //
+    function traverseHelper(node) {
+      if (node.left) traverseHelper(node.left);
+      // node || node.value
+      data.push(node.value);
+      if (node.right) traverseHelper(node.right);
     }
     //
     traverseHelper(current);
