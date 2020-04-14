@@ -104,7 +104,7 @@ class BinarySearchTree {
     while (queue.length) {
       // remove first item
       node = queue.shift();
-      //
+      // node || node.value
       data.push(node.value);
       //
       if (node.left) queue.push(node.left);
@@ -113,16 +113,42 @@ class BinarySearchTree {
     //
     return data;
   }
+  // root is first item
+  depth1stSearch_preOrder() {
+    // test
+    // [10, 6, 3, 8, 15, 20]
+    var data = [],
+      current = this.root;
+    function traverseHelper(node) {
+      // node || node.value
+      data.push(node.value);
+      //
+      if (node.left) traverseHelper(node.left);
+      if (node.right) traverseHelper(node.right);
+    }
+    //
+    traverseHelper(current);
+    return data;
+  }
   //
-  // depth1stSearch_preOrder() {
-  //   var data = [],
-  //     current = this.root;
-  //     helper = (node)=>{
-  //       data.push(node.v)
-  //     }
-
-  //   return data;
-  // }
+  // root is last item
+  depth1stSearch_postOrder() {
+    // test
+    // [3, 8, 6, 20, 15, 10]
+    var data = [],
+      current = this.root;
+    function traverseHelper(node) {
+      // node || node.value
+      //
+      if (node.left) traverseHelper(node.left);
+      if (node.right) traverseHelper(node.right);
+      //
+      data.push(node.value);
+    }
+    //
+    traverseHelper(current);
+    return data;
+  }
 }
 //
 class Node {
@@ -136,11 +162,12 @@ class Node {
 var tree = new BinarySearchTree();
 
 /*
-10
-6  15
-3 8    20
+`
+     10
+   6   15
+  3 8    20
+`
 */
-
 tree.insertIteratvive(10);
 tree.insertIteratvive(6);
 tree.insertIteratvive(15);
