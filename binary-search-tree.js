@@ -89,6 +89,40 @@ class BinarySearchTree {
     return false;
     //
   }
+  //
+  breadthFirstSearch() {
+    // test for bfs
+    // [10,6,15,3,8,20]
+    //
+    var data = [],
+      // FIFO
+      queue = [],
+      node = this.root;
+    //
+    queue.push(this.root);
+    // empty arrays aren't falsey
+    while (queue.length) {
+      // remove first item
+      node = queue.shift();
+      //
+      data.push(node.value);
+      //
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
+    }
+    //
+    return data;
+  }
+  //
+  // depth1stSearch_preOrder() {
+  //   var data = [],
+  //     current = this.root;
+  //     helper = (node)=>{
+  //       data.push(node.v)
+  //     }
+
+  //   return data;
+  // }
 }
 //
 class Node {
@@ -100,13 +134,27 @@ class Node {
 }
 //
 var tree = new BinarySearchTree();
-tree.root = new Node(10);
-tree.root.right = new Node(15);
-tree.root.left = new Node(7);
-tree.root.left.right = new Node(9);
-tree.insertIteratvive(100);
-tree.insertIteratvive(200);
-tree.insertIteratvive(300);
-tree.insertIteratvive(-100);
-tree.insertIteratvive(-200);
-tree.insertIteratvive(-300);
+
+/*
+10
+6  15
+3 8    20
+*/
+
+tree.insertIteratvive(10);
+tree.insertIteratvive(6);
+tree.insertIteratvive(15);
+tree.insertIteratvive(3);
+tree.insertIteratvive(8);
+tree.insertIteratvive(20);
+
+// tree.root = new Node(10);
+// tree.root.right = new Node(15);
+// tree.root.left = new Node(7);
+// tree.root.left.right = new Node(9);
+// tree.insertIteratvive(100);
+// tree.insertIteratvive(200);
+// tree.insertIteratvive(300);
+// tree.insertIteratvive(-100);
+// tree.insertIteratvive(-200);
+// tree.insertIteratvive(-300);
