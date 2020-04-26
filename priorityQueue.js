@@ -30,7 +30,7 @@ class PriorityQueue {
       let parentIdx = Math.floor((idx - 1) / 2);
       let parentVal = this.values[parentIdx];
       //
-      if (element.priority <= parentVal.priority) break;
+      if (element.priority >= parentVal.priority) break;
       // swap new element and its parent
       this.values[parentIdx] = element;
       this.values[idx] = parentVal;
@@ -42,7 +42,7 @@ class PriorityQueue {
   // removes maximum value, the 'root' node of the heap.
   dequeue() {
     // current max value
-    const max = this.values[0];
+    const min = this.values[0];
     // pop+reference last value
     const end = this.values.pop();
     // if extractmax is not last value
@@ -53,7 +53,7 @@ class PriorityQueue {
       this.sinkDown();
       //
     }
-    return max;
+    return min;
   }
   sinkDown() {
     //
@@ -75,7 +75,7 @@ class PriorityQueue {
         // left sided childnode
         leftChild = this.values[leftChildIdx];
         //
-        if (leftChild.priority > elmnt.priority) {
+        if (leftChild.priority < elmnt.priority) {
           swap = leftChildIdx;
         }
       }
@@ -85,9 +85,9 @@ class PriorityQueue {
         rightChild = this.values[rightChildIdx];
         //
         if (
-          (swap === null && rightChild.priority > elmnt.priority) ||
+          (swap === null && rightChild.priority < elmnt.priority) ||
           // also need to compare left and right child, need to update/swap the larger of the two
-          (swap !== null && rightChild.priority > leftChild.priority)
+          (swap !== null && rightChild.priority < leftChild.priority)
         ) {
           swap = rightChildIdx;
         }
