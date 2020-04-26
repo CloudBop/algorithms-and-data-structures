@@ -1,7 +1,7 @@
 class MaxBinaryHeap {
   //
   constructor() {
-    this.values = [ 41, 39, 33, 18, 27, 12 ];
+    this.values = [];
   }
   //
   insert(element) {
@@ -29,8 +29,76 @@ class MaxBinaryHeap {
       //
     }
   }
+  // removes maximum value, the 'root' node of the heap.
+  extractMax() {
+    // current max value
+    const max = this.values[0];
+    // pop+reference last value
+    const end = this.values.pop();
+    // if extractmax is not last value
+    if (this.values.length > 0) {
+      // swap last item with first
+      this.values[0] = end;
+      // is the new root idx > || < than parentNodes
+      this.sinkDown();
+      //
+    }
+    return max;
+  }
+  sinkDown() {
+    //
+    let idx = 0;
+    const length = this.values.length;
+    //
+    const elmnt = this.values[0];
+    //
+    while (true) {
+      // get position of left + right children
+      let leftChildIdx = 2 * idx + 1;
+      let rightChildIdx = 2 * idx + 2;
+      //
+      let leftChild, rightChild;
+      let swap = null;
+      //
+      // if leftside !outOfBounds, idx may not exist in array throwing error
+      if (leftChildIdx < length) {
+        // left sided childnode
+        leftChild = this.values[leftChildIdx];
+        //
+        if (leftChild > elmnt) {
+          swap = leftChildIdx;
+        }
+      }
+      // rightside
+      if (rightChildIdx < length) {
+        // right sided childnode
+        rightChild = this.values[rightChildIdx];
+        //
+        if (
+          (swap === null && rightChild > elmnt) ||
+          // also need to compare left and right child, need to update/swap the larger of the two
+          (swap !== null && rightChild > leftChild)
+        ) {
+          swap = rightChildIdx;
+        }
+      }
+      // breakout
+      if (swap === null) break;
+      // make the swaps
+      this.values[idx] = this.values[swap];
+      this.values[swap] = elmnt;
+      // update idx to next node
+      idx = swap;
+    }
+  }
 }
 
-const binheap = new MaxBinaryHeap();
+const heap = new MaxBinaryHeap();
 
-// binheap.insert(55);
+heap.insert(41);
+heap.insert(39);
+heap.insert(33);
+heap.insert(18);
+heap.insert(27);
+heap.insert(12);
+heap.insert(55);
