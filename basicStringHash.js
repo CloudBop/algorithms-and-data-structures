@@ -21,7 +21,7 @@ class HashStringTable {
   set(key, value) {
     //
     let idx = this._hash(key);
-
+    //  WARNING: WILL ACCEPT DUPLICATE KEYS
     // seperate chaining
     if (!this.keyMap[idx]) {
       // if not exist create bucket
@@ -47,6 +47,44 @@ class HashStringTable {
     }
     return undefined;
   }
+  keys() {
+    //
+    let keysArray = [];
+    for (let i = 0; i < this.keyMap.length; i++) {
+      //
+      if (this.keyMap[i]) {
+        // sub array
+        for (let j = 0; j < this.keyMap[i].length; j++) {
+          //
+          if (!keysArray.includes(this.keyMap[i][j][0])) {
+            // dont allow duplicate keys
+            keysArray.push(this.keyMap[i][j][0]);
+          }
+          //
+        }
+      }
+    }
+  }
+  values() {
+    //
+    let valuesArr = [];
+    for (let i = 0; i < this.keyMap.length; i++) {
+      //
+      if (this.keyMap[i]) {
+        // sub array
+        for (let j = 0; j < this.keyMap[i].length; j++) {
+          //
+          if (!valuesArr.includes(this.keyMap[i][j][1])) {
+            // dont allow duplicate values
+            valuesArr.push(this.keyMap[i][j][1]);
+          }
+          //
+        }
+      }
+    }
+    //
+    return valuesArr;
+  }
 }
 
 let ht = new HashStringTable(13);
@@ -57,6 +95,9 @@ ht.set('salmon', '#FA8072');
 ht.set('lightcoral', '#F08080');
 ht.set('mediumvioletred', '#C71585');
 ht.set('plum', '#DDA0DD');
+// for testing duplicate values
+ht.set('violet', '#DDA0DD');
+ht.set('purple', '#DDA0DD');
 
 // REALLY BASIC HASH EXAMPLES
 // function basicHash1(key, arrayLen) {
